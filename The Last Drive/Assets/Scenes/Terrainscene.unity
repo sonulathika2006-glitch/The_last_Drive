@@ -149,18 +149,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc0abb7867ca21c4b8c0987fd336eece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 286478836}
+  playerCamera: {fileID: 286478839}
   taxi: {fileID: 1900351324}
   driverSeat: {fileID: 577618058}
+  driverCameraPoint: {fileID: 610295805}
   exitPoint: {fileID: 1626278652}
   walkSpeed: 10
   mouseSensitivity: 2
   enterDistance: 15
-  driveSpeed: 12
-  reverseSpeed: 5
-  turnSpeed: 65
-  cameraHeight: 1.6
-  cameraOffset: {x: 0, y: 0, z: 0}
+  driveSpeed: 25
+  reverseSpeed: 10
+  acceleration: 6
+  braking: 8
+  coastingDeceleration: 1.5
+  turnSpeed: 36.5
+  steeringSmoothness: 2
+  lowSpeedSteering: 0.35
+  reverseTaxiForward: 1
+  reverseSteering: 0
+  cameraRotationOffset: {x: 0, y: 180, z: 0}
+  drivingLookLimit: 65
 --- !u!143 &30439085
 CharacterController:
   m_ObjectHideFlags: 0
@@ -196,7 +204,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1672.311, y: 0, z: 587.86}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 286478836}
@@ -722,6 +730,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1900351324}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &610295804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 610295805}
+  m_Layer: 0
+  m_Name: DriverCameraPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &610295805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610295804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1900351324}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704108536 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4819223349682164798, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
@@ -872,19 +911,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1657.3105
+      value: 1658.3105
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -922,18 +961,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5145561216308618294, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
+      propertyPath: m_Name
+      value: FrontLeftWheel
+      objectReference: {fileID: 0}
+    - target: {fileID: -5092771762793940947, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
+      propertyPath: m_Name
+      value: SteeringWheel
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       propertyPath: m_Name
       value: Taxi
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225602706113650402, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
+      propertyPath: m_Name
+      value: FrontRightWheel
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 577618058}
+      addedObject: {fileID: 610295805}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
       insertIndex: 1
+      addedObject: {fileID: 577618058}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
+      insertIndex: 2
       addedObject: {fileID: 1626278652}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -4819223349682164798, guid: 174b314765ea8504894dbe19d75b73e8, type: 3}
@@ -965,7 +1019,7 @@ Transform:
   m_GameObject: {fileID: 1626278651}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3000001, y: 1.2, z: 0}
+  m_LocalPosition: {x: 1.3000001, y: 0.6285715, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
